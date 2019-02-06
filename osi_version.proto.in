@@ -53,6 +53,6 @@ extend google.protobuf.FileOptions {
     optional InterfaceVersion current_interface_version = 81000;
 }
 
-option (current_interface_version).version_major = @VERSION_MAJOR@;
-option (current_interface_version).version_minor = @VERSION_MINOR@;
-option (current_interface_version).version_patch = @VERSION_PATCH@;
+option (current_interface_version).version_major = {OSI_MAJOR};
+option (current_interface_version).version_minor = {OSI_MINOR};
+option (current_interface_version).version_patch = {OSI_PATCH};
