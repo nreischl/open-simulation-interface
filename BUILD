@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:public"])
+
 load(":open_simulation_interface.bzl", "generate_osi_version_proto")
 generate_osi_version_proto(name = "osi_version", major = "3", minor = "0", patch = "1")
 
