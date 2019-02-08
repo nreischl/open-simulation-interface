@@ -12,7 +12,7 @@ cc_library(
 cc_proto_library(
     name = "open_simulation_interface",
     deps = [
-        ":osi_sensordata_proto"
+        ":osi_datarecording_proto"
     ]
 )
 
