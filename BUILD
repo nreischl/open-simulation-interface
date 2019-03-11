@@ -1,20 +1,62 @@
 package(default_visibility = ["//visibility:public"])
-
+load("@rules_proto//cpp:cpp_proto_compile.bzl", "cpp_proto_compile")
 load(":open_simulation_interface.bzl", "generate_osi_version_proto")
-generate_osi_version_proto(name = "osi_version", major = "3", minor = "0", patch = "1")
 
-#cc_library(
-#    name = "osi3",
-#    deps = [":open_simulation_interface"],
-#    visibility = ["//visibility:public"]
-#)
+generate_osi_version_proto(name = "osi_version", major = "3", minor = "1", patch = "2")
 
 cc_proto_library(
     name = "osi3",
-    deps = [
-        ":osi_datarecording_proto"
-    ],
+    deps = [":osi_datarecording_proto"],
     visibility = ["//visibility:public"]
+)
+
+cc_library(
+    name = "osi3_static",
+    srcs = ["osi3_cpp_proto"],
+    hdrs = ["osi3_cpp_proto"],
+    includes = ["osi3_cpp_proto"],
+    deps = ["@com_google_protobuf//:protobuf"],
+    linkstatic = True,
+    visibility = ["//visibility:public"]
+)
+
+cc_binary(
+    name = "libosi3.so",
+    srcs = ["osi3_cpp_proto"],
+    includes = ["osi3_cpp_proto"],
+    deps = ["@com_google_protobuf//:protobuf"],
+    linkopts = ["-shared"],
+    linkstatic = True,
+    visibility = ["//visibility:public"]
+)
+
+cpp_proto_compile(
+    name = "osi3_cpp_proto",
+    deps = [
+        ":osi_common_proto",
+        ":osi_datarecording_proto",
+        ":osi_detectedlane_proto",
+        ":osi_detectedobject_proto",
+        ":osi_detectedoccupant_proto",
+        ":osi_detectedroadmarking_proto",
+        ":osi_detectedtrafficlight_proto",
+        ":osi_detectedtrafficsign_proto",
+        ":osi_environment_proto",
+        ":osi_featuredata_proto",
+        ":osi_groundtruth_proto",
+        ":osi_hostvehicledata_proto",
+        ":osi_lane_proto",
+        ":osi_object_proto",
+        ":osi_occupant_proto",
+        ":osi_roadmarking_proto",
+        ":osi_sensordata_proto",
+        ":osi_sensorspecific_proto",
+        ":osi_sensorview_proto",
+        ":osi_sensorviewconfiguration_proto",
+        ":osi_trafficlight_proto",
+        ":osi_trafficsign_proto",
+        ":osi_version_proto",
+    ],
 )
 
 proto_library(
