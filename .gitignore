@@ -35,3 +35,6 @@ githooks/pre-commit
 
 # PyCharm specific files
 .idea
+
+# CLion specific files
+.clwb

@@ -1,13 +1,14 @@
 package(default_visibility = ["//visibility:public"])
 
 load(":open_simulation_interface.bzl", "generate_osi_version_proto")
-generate_osi_version_proto(name = "osi_version", major = "3", minor = "0", patch = "1")
+generate_osi_version_proto(name = "osi_version", major = "3", minor = "1", patch = "2")
 
-#cc_library(
-#    name = "osi3",
-#    deps = [":open_simulation_interface"],
-#    visibility = ["//visibility:public"]
-#)
+cc_library(
+    name = "osi3_cc_library",
+    includes = ["."],
+    deps = [":osi3"],
+    visibility = ["//visibility:public"]
+)
 
 cc_proto_library(
     name = "osi3",
